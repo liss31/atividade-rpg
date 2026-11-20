@@ -1,0 +1,34 @@
+CREATE TABLE USUARIOS
+(
+    UsuarioId INT PRIMARY KEY IDENTITY(1,1),
+    Email VARCHAR(150),
+    Senha VARCHAR(255)
+);
+CREATE TABLE CLASSES
+(
+    ClasseId INT PRIMARY KEY IDENTITY(1,1),
+    Nome VARCHAR(100),
+    Descricao VARCHAR(255)
+);
+CREATE TABLE HABILIDADES
+(
+    HabilidadeId INT PRIMARY KEY IDENTITY(1,1),
+    Nome VARCHAR(100)
+);
+CREATE TABLE PERSONAGENS
+(
+    PersonagemId INT PRIMARY KEY IDENTITY(1,1),
+    NomePersonagem VARCHAR(100),
+    UsuarioId INT,
+    ClasseId INT,
+    FOREIGN KEY (UsuarioId) REFERENCES USUARIOS(UsuarioId),
+    FOREIGN KEY (ClasseId) REFERENCES CLASSES(ClasseId)
+);
+CREATE TABLE CLASSES_HABILIDADES
+(
+    ClasseId INT,
+    HabilidadeId INT,
+    PRIMARY KEY (ClasseId, HabilidadeId),
+    FOREIGN KEY (ClasseId) REFERENCES CLASSES(ClasseId),
+    FOREIGN KEY (HabilidadeId) REFERENCES HABILIDADES(HabilidadeId)
+);
